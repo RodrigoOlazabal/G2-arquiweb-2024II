@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container" style="text-align: center">
+        <h2>Registro de Tipo de pago</h2>
+        <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+          <mat-form-field class="example-full-width" *ngIf="edicion">
+            <mat-label>id</mat-label>
+            <input matInput placeholder="Id" formControlName="idMetodoPago" [readonly]="true" />
+          </mat-form-field>
+          <br />
+
+            <!--ID USUARIO-->
+            <mat-form-field class="example-full-width">
+                <mat-label>Id Usuario</mat-label>
+                <mat-select formControlName="user" >
+                    <mat-option *ngFor="let u of listaUsuario" [value]="u.id" [disabled]="edicion">
+                        {{ u.username }} <!-- Replace with the actual property representing the user name -->
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="obtenerControlCampo('user')?.errors?.['required']">
+                    El Id del Usuario es obligatorio.
+                </mat-error>
+            </mat-form-field>
+
+
+            <!--tipo-->
+             <mat-form-field class="example-full-width">
+                <mat-label>Tipo</mat-label>
+                <mat-select formControlName="tipoPago">
+                    <mat-option *ngFor="let p of tipos" [value]="p.value" >
+                        {{ p.viewValue }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="obtenerControlCampo('tipoPago')?.errors?.['required']">
+                    El tipo es obligatorio.
+                </mat-error>
+            </mat-form-field>
+
+            <!--BOTONES-->
+            <div class="botones">
+            <button mat-raised-button color="primary"> <!-- ALTERNATIVA ANGULAR MATERIAL BUTTON mat-raised-button -->
+                Aceptar</button>
+            <button mat-raised-button color="warn" routerLink="/components/metPago">
+                Cancelar</button>
+            </div>
+            <p>{{ mensaje }}</p>
+        </form>
+    </div>
+
+    
+</body>
+</html>

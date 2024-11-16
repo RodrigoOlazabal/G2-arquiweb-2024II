@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+
+        <br />
+        <h2 style="text-align: center">Lista de Usuarios</h2>
+        <div style="text-align: right">
+          <button mat-raised-button color="primary" routerLink="/components/usuarios/nuevo">Nuevo </button>
+        </div>
+        <mat-form-field>
+          <input matInput (keyup)="filter($event)" placeholder="Buscar" />
+        </mat-form-field>
+        <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
+          <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+    
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Codigo</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+    
+            
+          <!-- Name Column -->
+          <ng-container matColumnDef="nombres">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.nombres }}
+            </td>
+          </ng-container>
+    
+          <!-- Weight Column -->
+          <ng-container matColumnDef="apellidos">
+            <th mat-header-cell *matHeaderCellDef>Apellidos </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.apellidos }}
+            </td>
+          </ng-container>
+    
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="genero">
+            <th mat-header-cell *matHeaderCellDef>Genero</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.genero }}
+            </td>
+          </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Correo</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.email }}
+            </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="dni">
+            <th mat-header-cell *matHeaderCellDef>DNI</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.dni }}
+            </td>
+          </ng-container>
+    
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="celular">
+            <th mat-header-cell *matHeaderCellDef>Celular</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.celular }}
+            </td>
+          </ng-container>
+
+            <!-- Fecha registro - VALIDADR SI EL FORMATO PARA MOSTRAR LA FECHA, es el correcto -->
+          <ng-container matColumnDef="fechaRegistro">
+            <th mat-header-cell *matHeaderCellDef>Fecha Registro</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.fechaRegistro }}
+            </td>
+          </ng-container>
+
+    
+          <ng-container matColumnDef="accion01">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-raised-button color="warn" [routerLink]="['ediciones', element.id]">
+                Actualizar
+              </button>
+            </td>
+          </ng-container>
+        
+    
+          <ng-container matColumnDef="accion02">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-mini-fab color="warn" aria-label="Example icon button with a home icon"
+                (click)="eliminar(element.id)">
+                <mat-icon>delete</mat-icon>
+                <!--Eliminar-->
+              </button>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 15, 25, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+
+</body>
+</html>

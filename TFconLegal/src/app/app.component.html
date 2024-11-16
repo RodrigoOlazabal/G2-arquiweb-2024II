@@ -1,0 +1,67 @@
+<mat-toolbar *ngIf="verificar()" color="primary">
+  <mat-icon>menu</mat-icon>
+  <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  <button mat-button [matMenuTriggerFor]="menuUsuarios" *ngIf="validarRol()">Usuarios</button>
+  <button mat-button [matMenuTriggerFor]="menuMepago" *ngIf="validarRol()">Metodo Pago</button>
+  <button mat-button [matMenuTriggerFor]="menuSuscripcion" *ngIf="validarRol()">Sucripción</button>
+  <button mat-button [matMenuTriggerFor]="menuDocLegal" *ngIf="validarRol()">Documento Legal</button>
+  <button mat-button [matMenuTriggerFor]="menuReportes" *ngIf="validarRol()">Reportes</button>
+  <button mat-button [matMenuTriggerFor]="menuSalir">Usuario</button>
+
+</mat-toolbar>
+
+  <mat-menu #menuInicio="matMenu">
+ 
+  <!-- Agrega más elementos de menú si es necesario -->
+  </mat-menu>
+
+
+  <mat-menu #menuUsuarios="matMenu">
+    <button mat-menu-item routerLink="components/usuarios" *ngIf="role == 'ADMIN'">Listar</button>
+    <button mat-menu-item routerLink="components/usuarios/nuevo">Registrar</button>
+  
+    <!-- Agrega más elementos de menú si es necesario -->
+  </mat-menu>
+
+  <mat-menu #menuMepago="matMenu">
+    <button mat-menu-item routerLink="components/metPago" *ngIf="role == 'ADMIN'">Listar</button>
+    <button mat-menu-item routerLink="components/metPago/nuevo">Registrar</button>
+  
+    <!-- Agrega más elementos de menú si es necesario -->
+  </mat-menu>
+
+
+  <mat-menu #menuSuscripcion="matMenu">
+    <button mat-menu-item routerLink="components/suscrip" *ngIf="role == 'ADMIN'">Listar</button>
+    <button mat-menu-item routerLink="components/suscrip/nuevo">Registrar</button>
+  
+    <!-- Agrega más elementos de menú si es necesario -->
+  </mat-menu>
+
+  <mat-menu #menuDocLegal="matMenu">
+    <button mat-menu-item routerLink="components/doclegal" *ngIf="role == 'ADMIN'">Listar</button>
+    <button mat-menu-item routerLink="components/doclegal/nuevo">Registrar</button>
+  
+    <!-- Agrega más elementos de menú si es necesario -->
+  </mat-menu>
+
+  <mat-menu #menuReportes="matMenu">      <!--implementar si no lo necesitas -->
+    <button mat-menu-item routerLink="components/reportes" *ngIf="role == 'ADMIN'" >Reporte01</button>
+  
+    <!-- Agrega más elementos de menú si es necesario -->
+  </mat-menu>
+
+<!-- Para salir de la sesión y validar que tipo de rol tienes -->
+ 
+<mat-menu #menuSalir="matMenu">
+  <button mat-menu-item routerLink="components/login" (click)="cerrar()">
+    <mat-icon>logout</mat-icon>
+    <span>Cerrar sesión</span>
+
+  </button>
+  <button mat-menu-item >Rol:
+    <span>{{role}}</span>
+  </button>
+</mat-menu>
+
+<router-outlet></router-outlet>
