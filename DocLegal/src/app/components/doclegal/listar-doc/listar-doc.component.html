@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <br />
+        <h2 style="text-align: center">Lista de Documentos legales</h2>
+    
+        <div style="text-align: right">                         <!-- corregir ruta -->
+          <button mat-raised-button color="accent" routerLink="/components/doclegal/nuevo"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+            </svg>
+            Nuevo
+          </button>
+        </div>
+    
+        <mat-form-field class="buscarInput">
+          <input matInput (keyup)="filter($event)" placeholder="Buscar" />
+        </mat-form-field>
+        <!--  hu3 y 4-->
+    
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Column 1-->
+          <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef>Codigo</th>
+            <td mat-cell *matCellDef="let element">{{ element.idDocumento }}</td>
+          </ng-container>
+
+          <!-- Column 2-->
+          <ng-container matColumnDef="tipoDocumento">
+            <th mat-header-cell *matHeaderCellDef>Tipo de documento</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.tipoDocumento }}
+            </td>
+          </ng-container>
+
+          <!--  Column 3-->
+          <ng-container matColumnDef="tituloDocumento">
+            <th mat-header-cell *matHeaderCellDef>Título de documento</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.tituloDocumento }}
+            </td>
+          </ng-container>
+
+          <!--  Column 5-->
+          <ng-container matColumnDef="fechaPublicacion">
+            <th mat-header-cell *matHeaderCellDef>Fecha de Publicación</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.fechaPublicacion }}
+            </td>
+          </ng-container>
+
+          <!--  Column 5-->
+          <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef>Usuario</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.user.username }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="accion01">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-raised-button color="warn" [routerLink]="['ediciones', element.idDocumento]">
+                Actualizar
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="accion02">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-mini-fab color="warn" aria-label="Example icon button with a home icon"
+                (click)="eliminar(element.idDocumento)">
+                <mat-icon>delete</mat-icon>
+                <!--Eliminar-->
+              </button>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 15, 25, 100]" showFirstLastButtons></mat-paginator>
+      </div>
+    
+</body>
+</html>

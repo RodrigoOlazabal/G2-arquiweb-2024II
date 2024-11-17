@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container" style="text-align: center">
+        <h2>Registro de Documentos legales</h2>
+        <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+          <mat-form-field class="example-full-width" *ngIf="edicion">
+            <mat-label>id</mat-label>
+            <input matInput placeholder="Id" formControlName="idDocumento" [readonly]="true" />
+          </mat-form-field>
+          <br />
+
+            <!--ID USUARIO-->
+            <mat-form-field class="example-full-width">
+                <mat-label>Id Usuario</mat-label>
+                <mat-select formControlName="user" >
+                    <mat-option *ngFor="let u of listaUsuario" [value]="u.id" [disabled]="edicion">
+                        {{ u.username }} <!-- Replace with the actual property representing the user name -->
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="obtenerControlCampo('user')?.errors?.['required']">
+                    El Id del Usuario es obligatorio.
+                </mat-error>
+            </mat-form-field>
+
+            
+
+            <!--tipo-->
+             <mat-form-field class="example-full-width">
+                <mat-label>Tipo</mat-label>
+                <mat-select formControlName="tipoDocumento">
+                    <mat-option *ngFor="let p of tipos" [value]="p.value" >
+                        {{ p.viewValue }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="obtenerControlCampo('tipoDocumento')?.errors?.['required']">
+                    El tipo es obligatorio.
+                </mat-error>
+            </mat-form-field>
+
+            <!--tituloDocumento-->
+            <br />
+            <mat-form-field class="example-full-width">
+              <mat-label>Titulo de documento</mat-label>
+              <input
+                matInput
+                placeholder="Titulo"
+                formControlName="tituloDocumento"
+              />
+              <mat-error
+                *ngIf="obtenerControlCampo('tituloDocumento')?.errors?.['required']"
+              >
+                El Título es obligatorio
+              </mat-error>
+            </mat-form-field>
+
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label>Descripción</mat-label>
+                <textarea 
+                matInput 
+                placeholder="Descrpción del documento"
+                formControlName="descripcionDocumento"></textarea>
+                
+                <mat-error
+                *ngIf="obtenerControlCampo('descripcionDocumento')?.errors?.['required']"
+              >
+                La descripción es obligatorio
+              </mat-error>
+            </mat-form-field>
+
+            <!--descripcionDocumento 
+            <br />
+            <mat-form-field class="example-full-width">
+              <mat-label>Descripción</mat-label>
+              <input
+                matInput
+                placeholder="Descrpción del documento"
+                formControlName="descripcionDocumento"
+              />
+              <mat-error
+                *ngIf="obtenerControlCampo('descripcionDocumento')?.errors?.['required']"
+              >
+                La descripción es obligatorio
+              </mat-error>
+            </mat-form-field>  -->
+
+            <!--urlDocumento-->
+            <br />
+            <mat-form-field class="example-full-width">
+              <mat-label>Url de documetno</mat-label>
+              <input
+                matInput
+                placeholder="Url del documento"
+                formControlName="urlDocumento"
+              />
+              <mat-error
+                *ngIf="obtenerControlCampo('urlDocumento')?.errors?.['required']"
+              >
+                La Url es obligatorio
+              </mat-error>
+            </mat-form-field>
+
+             <!--fecha-->
+             <mat-form-field appearance="fill" class="example-full-width">
+                <input matInput formControlName="fechaPublicacion" [readonly]="true"/>
+                <mat-hint>Fecha de publicación</mat-hint>
+            </mat-form-field>
+            <br />
+
+            <!--BOTONES-->
+            <div class="botones">
+            <button mat-raised-button color="primary"> <!-- ALTERNATIVA ANGULAR MATERIAL BUTTON mat-raised-button -->
+                Aceptar</button>
+            <button mat-raised-button color="warn" routerLink="/components/doclegal">
+                Cancelar</button>
+            </div>
+            <p>{{ mensaje }}</p>
+        </form>
+    </div>
+
+</body>
+</html>
